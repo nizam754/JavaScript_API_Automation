@@ -56,8 +56,9 @@ describe("Users", () => {
         expect(res.body.data).to.deep.include(data);
       });
   });
+
   //API Tests for HTTP PUT method
-  it.only("PUT /users/:id", () => {
+  it("PUT /users/:id", () => {
     const data = {
       status: "Active",
       name: `Salman - ${Math.floor(Math.random() * 9999)}`,
@@ -71,6 +72,16 @@ describe("Users", () => {
         //console.log(res.body);
         //console.log(res.body.data);
         expect(res.body.data).to.deep.include(data);
+      });
+  });
+
+  //API Tests for HTTP DELETE method
+  it.only("DELETE /users/:id", () => {
+    return request
+      .delete("users/10")
+      .set("Authorization", `Bearer ${TOKEN}`)
+      .then((res) => {
+        expect(res.body.data).to.be.eq(null);
       });
   });
 });
