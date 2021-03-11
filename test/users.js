@@ -36,8 +36,9 @@ describe("Users", () => {
       });
     });
   });
-
-  it.only("POST /users", () => {
+  //API Tests for HTTP POST method
+  it("POST /users", () => {
+    //it.only use for only this request
     const data = {
       email: `test-${Math.floor(Math.random() * 9999)}@mail.com`,
       name: "test name",
@@ -52,6 +53,23 @@ describe("Users", () => {
       .then((res) => {
         // console.log(res.body);
         // data.gender = "Female";
+        expect(res.body.data).to.deep.include(data);
+      });
+  });
+  //API Tests for HTTP PUT method
+  it.only("PUT /users/:id", () => {
+    const data = {
+      status: "Active",
+      name: `Salman - ${Math.floor(Math.random() * 9999)}`,
+    };
+
+    return request
+      .put("users/10")
+      .set("Authorization", `Bearer ${TOKEN}`)
+      .send(data)
+      .then((res) => {
+        //console.log(res.body);
+        //console.log(res.body.data);
         expect(res.body.data).to.deep.include(data);
       });
   });
