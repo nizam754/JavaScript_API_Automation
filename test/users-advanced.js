@@ -28,7 +28,7 @@ describe("Users", () => {
           // data.gender = "Female";
           expect(res.body.data).to.deep.include(data);
           userId = res.body.data.id;
-          // console.log(userId);
+          console.log(userId);
         });
     });
   });
