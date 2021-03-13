@@ -1,11 +1,13 @@
-import supertest from "supertest";
-const request = supertest("https://gorest.co.in/public-api/");
+require("dotenv").config();
+import request from "../config/common";
+const faker = require("faker");
 
 import { expect } from "chai";
 import { createRandomuser } from "../helper/user_helper";
 
-const TOKEN =
-  "c02177b60339dcc1d981da685bdfd5a6546606e03d3c158b99d2d686c7fd4e40";
+const TOKEN = process.env.USER_TOKEN;
+/* const TOKEN =
+  "c02177b60339dcc1d981da685bdfd5a6546606e03d3c158b99d2d686c7fd4e40"; */
 
 describe.only("User Posts", () => {
   let postId, userId;
@@ -16,8 +18,8 @@ describe.only("User Posts", () => {
   it("/posts", async () => {
     const data = {
       user_id: userId,
-      title: "My Title",
-      body: "my blog post",
+      title: faker.lorem.sentence(),
+      body: faker.lorem.paragraphs(),
     };
 
     const postRes = await request
